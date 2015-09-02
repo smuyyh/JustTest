@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javafx.scene.chart.PieChart.Data;
+
 public class Main {
 
     public static String OS = "windows";
@@ -39,11 +41,11 @@ public class Main {
 
         Calendar start = Calendar.getInstance();
         start.setTime(startDate);
-        long startTimeMillis = start.getTimeInMillis();
+        long startTimeMillis = startDate.getTime();
 
         Calendar end = Calendar.getInstance();
         end.setTime(endDate);
-        long endTimeMillis = end.getTimeInMillis();
+        long endTimeMillis = endDate.getTime();
 
         long oneDay = 1000 * 60 * 60 * 24l;
 
