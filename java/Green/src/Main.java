@@ -52,7 +52,7 @@ public class Main {
         long time = startTimeMillis;
         while (time <= endTimeMillis) {
             Date d = new Date(time + 1000);
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
             String date = df.format(d);
             System.out.println(date);
