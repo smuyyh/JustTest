@@ -19,6 +19,8 @@ public class Main {
     static File directory = new File("");
     static String courseFile = "";
 
+    public static int times = 1;
+
     public static void commit() throws IOException {
         String cmd = courseFile + File.separator + "nircmd elevate git commit -a -m \"commit file\"";
         System.out.println(cmd);
@@ -31,7 +33,7 @@ public class Main {
             file.createNewFile();
 
         FileOutputStream out = new FileOutputStream(file);
-        out.write(new String(System.currentTimeMillis() + "" ).getBytes());
+        out.write(new String(System.currentTimeMillis() + "").getBytes());
         out.close();
     }
 
@@ -60,17 +62,19 @@ public class Main {
             System.out.println(date);
             String cmd = courseFile + File.separator + "nircmd elevate cmd /c date " + date;
             Runtime.getRuntime().exec(cmd);
-            modifyFile();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            commit();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            for (int i = 0; i < times; i++) {
+                modifyFile();
+                commit();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
             time += oneDay;
@@ -100,8 +104,11 @@ public class Main {
         }
         System.out.println(courseFile);
 
-        if (args.length == 1) {
+        if(args.length == 1){
             startTime = args[0];
+        }else if (args.length == 2) {
+            startTime = args[0];
+            times = Integer.parseInt(args[1]);
         } else {
             for (int i = 0; i < args.length; i += 2) {
                 if (args[i].equals("-start")) {
@@ -109,7 +116,7 @@ public class Main {
                 } else if (args[i].equals("-end")) {
                     endTime = args[i + 1];
                 } else {
-                    System.out.println("args error");
+                    times = Integer.parseInt(args[i]);
                 }
             }
         }
