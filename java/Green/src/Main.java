@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import javafx.scene.chart.PieChart.Data;
 
@@ -19,7 +20,8 @@ public class Main {
     static String courseFile = "";
 
     public static void commit() throws IOException {
-        String cmd = courseFile + File.separator + "nircmd  elevate git commit -a -m \"commit file\"";
+        String cmd = courseFile + File.separator + "nircmd elevate git commit -a -m \"commit file\"";
+        System.out.println(cmd);
         Runtime.getRuntime().exec(cmd);
     }
 
@@ -29,7 +31,7 @@ public class Main {
             file.createNewFile();
 
         FileOutputStream out = new FileOutputStream(file);
-        out.write(new String(System.currentTimeMillis() + "").getBytes());
+        out.write(new String(System.currentTimeMillis() + "" ).getBytes());
         out.close();
     }
 
@@ -52,7 +54,7 @@ public class Main {
         long time = startTimeMillis;
         while (time <= endTimeMillis) {
             Date d = new Date(time + 1000);
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
             String date = df.format(d);
             System.out.println(date);
@@ -60,11 +62,16 @@ public class Main {
             Runtime.getRuntime().exec(cmd);
             modifyFile();
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             commit();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             time += oneDay;
         }
