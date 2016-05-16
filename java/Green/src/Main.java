@@ -56,14 +56,12 @@ public class Main {
             System.out.println(date);
             String cmd = courseFile + File.separator + "nircmd elevate cmd /c date " + date;
             Runtime.getRuntime().exec(cmd);
-
+            modifyFile();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            modifyFile();
             commit();
 
             time += oneDay;
@@ -93,13 +91,17 @@ public class Main {
         }
         System.out.println(courseFile);
 
-        for (int i = 0; i < args.length; i += 2) {
-            if (args[i].equals("-start")) {
-                startTime = args[i + 1];
-            } else if (args[i].equals("-end")) {
-                endTime = args[i + 1];
-            } else {
-                System.out.println("args error");
+        if (args.length == 1) {
+            startTime = args[0];
+        } else {
+            for (int i = 0; i < args.length; i += 2) {
+                if (args[i].equals("-start")) {
+                    startTime = args[i + 1];
+                } else if (args[i].equals("-end")) {
+                    endTime = args[i + 1];
+                } else {
+                    System.out.println("args error");
+                }
             }
         }
 
