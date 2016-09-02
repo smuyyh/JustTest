@@ -6,9 +6,9 @@ import random
 
 
 def modify():
-    file = open('../zero.md', 'r')
+    file = open('../java/xx.txt', 'r')
     file.close()
-    file = open('../zero.md', 'w+')
+    file = open('../java/xx.txt', 'w+')
     file.write(chr(random.randint(0, 100)))
     file.close()
 
