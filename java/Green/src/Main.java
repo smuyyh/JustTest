@@ -5,9 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
-
-import javafx.scene.chart.PieChart.Data;
 
 public class Main {
 
@@ -104,9 +101,9 @@ public class Main {
         }
         System.out.println(courseFile);
 
-        if(args.length == 1){
+        if (args.length == 1) {
             startTime = args[0];
-        }else if (args.length == 2) {
+        } else if (args.length == 2) {
             startTime = args[0];
             times = Integer.parseInt(args[1]);
         } else {
@@ -115,16 +112,27 @@ public class Main {
                     startTime = args[i + 1];
                 } else if (args[i].equals("-end")) {
                     endTime = args[i + 1];
+                } else if (args[i].equals("-times")) {
+                    times = Integer.parseInt(args[i + 1]);
                 } else {
-                    times = Integer.parseInt(args[i]);
+                    System.out.println("args error");
                 }
             }
+        }
+        
+        if(startTime == null || startTime.length() <1){
+            System.err.println("time error");
+            return;
+        }
+        
+        if(endTime == null || endTime.length()<1){
+            endTime = startTime;
         }
 
         try {
             modifyTime();
         } catch (ParseException e) {
-            System.out.println("times error");
+            System.out.println("time error");
         } catch (IOException e) {
             System.out.println("error:" + e.toString());
         }
